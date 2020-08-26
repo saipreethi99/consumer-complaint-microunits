@@ -73,6 +73,7 @@ public class ComplaintRestController {
 	}
 	
 	@GetMapping("/consumers/{consumerId}")
+	@ResponseStatus(HttpStatus.FOUND)
 	public List<ComplaintDto> fetchAllComplaintsByConsumer(@PathVariable("consumerId")int consumerId) {
 		List<Complaint> list = complaintservice.allComplaintsByConsumer(consumerId);
 		List<ComplaintDto> response = new ArrayList<>();
