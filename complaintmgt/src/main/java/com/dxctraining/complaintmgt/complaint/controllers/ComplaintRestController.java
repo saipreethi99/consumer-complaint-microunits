@@ -59,6 +59,7 @@ public class ComplaintRestController {
 	}
 
 	@GetMapping
+	@ResponseStatus(HttpStatus.FOUND)
 	public List<ComplaintDto> fetchAll() {
 		List<Complaint> list = complaintservice.displayAllComplaints();
 		List<ComplaintDto> response = new ArrayList<>();
