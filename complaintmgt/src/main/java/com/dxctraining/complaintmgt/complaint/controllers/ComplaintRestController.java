@@ -49,7 +49,6 @@ public class ComplaintRestController {
 	}
 
 	@GetMapping("/get/{id}")
-	@ResponseStatus(HttpStatus.CREATED)
 	public ComplaintDto getComplaint(@PathVariable("id") int id) {
 		Complaint complaint = complaintservice.findComplaintById(id);
 		int consumerId=complaint.getConsumerId();
@@ -59,7 +58,6 @@ public class ComplaintRestController {
 	}
 
 	@GetMapping
-	@ResponseStatus(HttpStatus.FOUND)
 	public List<ComplaintDto> fetchAll() {
 		List<Complaint> list = complaintservice.displayAllComplaints();
 		List<ComplaintDto> response = new ArrayList<>();
@@ -73,7 +71,6 @@ public class ComplaintRestController {
 	}
 	
 	@GetMapping("/consumers/{consumerId}")
-	@ResponseStatus(HttpStatus.FOUND)
 	public List<ComplaintDto> fetchAllComplaintsByConsumer(@PathVariable("consumerId")int consumerId) {
 		List<Complaint> list = complaintservice.allComplaintsByConsumer(consumerId);
 		List<ComplaintDto> response = new ArrayList<>();
