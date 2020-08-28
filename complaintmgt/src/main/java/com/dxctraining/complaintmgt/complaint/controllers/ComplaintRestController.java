@@ -2,7 +2,6 @@ package com.dxctraining.complaintmgt.complaint.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,13 +14,12 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import com.dxctraining.complaintmgt.Util.ComplaintUtil;
 import com.dxctraining.complaintmgt.complaint.dto.ComplaintDto;
 import com.dxctraining.complaintmgt.complaint.dto.ConsumerDto;
 import com.dxctraining.complaintmgt.complaint.dto.CreateComplaintRequest;
 import com.dxctraining.complaintmgt.complaint.entities.Complaint;
 import com.dxctraining.complaintmgt.complaint.service.IComplaintService;
-
+import com.dxctraining.complaintmgt.complaint.util.ComplaintUtil;
 
 @RestController
 @RequestMapping("/complaints")
@@ -39,12 +37,12 @@ public class ComplaintRestController {
     @PostMapping("/add")
 	@ResponseStatus(HttpStatus.CREATED)
 	public ComplaintDto add(@RequestBody CreateComplaintRequest requestData) {
-    	Complaint complaint = new Complaint();
     	String description=requestData.getDescription();
 		int consumerId=requestData.getConsumerId();
-		complaint=complaintservice.add(complaint);
+    	Complaint complaint = new Complaint(description,consumerId);
+ 		complaint=complaintservice.add(complaint);
 		ConsumerDto consumerdto=fetchFromConsumerById(consumerId);
-		ComplaintDto response = complaintUtil.complaintDto(complaint, consumerId, consumerdto.getName());
+		ComplaintDto response = complaintUtil.complaintDto(complaint, consumerdto.getId(), consumerdto.getName());
 		return response;
 	}
 
@@ -82,7 +80,6 @@ public class ComplaintRestController {
 		return response;
 	}
 	
-
 	 public ConsumerDto fetchFromConsumerById(int consumerId) {
 	 String url = "http://localhost:8586/consumers/get/" + consumerId;
 	 ConsumerDto dto = restTemplate.getForObject(url, ConsumerDto.class);

@@ -1,4 +1,4 @@
-package com.dxctraining.complaintmgt.Util;
+package com.dxctraining.complaintmgt.complaint.util;
 
 import org.springframework.stereotype.Component;
 

@@ -1,7 +1,7 @@
 package com.dxctraining.consumermgt.consumer.dto;
 
 public class CreateConsumerRequest {
-
+	
     private String name;
 
     public String getName() {

@@ -8,7 +8,7 @@ public interface IComplaintDao {
 
 	Complaint findComplaintById(int id);
 
-	Complaint add(Complaint consumer);
+	Complaint add(Complaint complaint);
 
 	List<Complaint> displayAllComplaints();
 

@@ -28,8 +28,9 @@ public class ConsumerRestController {
 	@PostMapping("/add")
 	@ResponseStatus(HttpStatus.CREATED)
 	public ConsumerDto add(@RequestBody CreateConsumerRequest requestData) {
-		Consumer consumer = new Consumer();
-		consumer.setName(requestData.getName());
+		String name=requestData.getName();
+		Consumer consumer = new Consumer(name);
+		consumerservice.add(consumer);
 		ConsumerDto response = toDto(consumer);
 		return response;
 	}
